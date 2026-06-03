@@ -2,7 +2,7 @@
 name: grill-before-contract
 scope: shared
 used-by: [planner]
-description: Structured interrogation the Planner runs before drafting a contract — surface every ambiguity and resolve each invariant and model boundary through one-question-at-a-time questioning. Use when starting a new task, when a user story is vague, or before filling contract-template.md.
+description: Structured interrogation the Planner runs before drafting a contract — surface every ambiguity and resolve each invariant and model boundary through one-question-at-a-time questioning. Use when starting a new task, when a user story is vague, or before drafting the contract.
 ---
 
 # Grill Before Contract

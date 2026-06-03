@@ -1,0 +1,11 @@
+{
+  "name": "domain-driven-agents",
+  "owner": { "name": "Steinklo" },
+  "plugins": [
+    {
+      "name": "domain-driven-agents",
+      "source": ".",
+      "description": "C# DDD agent pipeline — role subagents (Planner, Executor, Reviewer, Documenter) plus the DDD coding skills they enforce."
+    }
+  ]
+}

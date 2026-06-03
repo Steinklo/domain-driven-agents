@@ -28,12 +28,13 @@ NetArchTest, FluentValidation).
 
 - **Skills** (`skills/`) — coding rules, patterns, and examples. The durable
   knowledge base that agents reference.
-- **Agents** (`agents/`) — role definitions with behavior, skills to read,
-  and what to produce.
-- **Contract** (`contract-template.md`) — structured handoff format between
-  agents. The Planner produces a filled contract per task; store it in the
-  target project (e.g. `docs/contracts/`) so downstream agents can read it.
-- **AGENTS.md** — universal conduct, task sizing, and handoffs all agents follow.
+- **Agents** (`agents/`) — the four roles as subagents (frontmatter + behavior),
+  each declaring the skills it loads.
+- **Contract** (`contract-template` skill) — the tier-sized spec the Planner
+  produces per task; stored in the target project (e.g. `docs/contracts/`) so
+  downstream agents can read it.
+- **AGENTS.md** + **`pipeline-conduct`** — the startup sequence, and the universal
+  conduct, task sizing, and handoffs every role follows.
 
 ## Scope
 
@@ -60,3 +61,20 @@ your-agent
 
 The story is raw input; the Planner refines it into the contract through grilling.
 It asks before it assumes.
+
+## Use it as a Claude Code plugin
+
+Installed as a plugin, the skills and the four roles (as subagents) become available
+*inside* your target project — no need to open this repo and point at a remote path.
+
+```
+/plugin marketplace add Steinklo/domain-driven-agents
+/plugin install domain-driven-agents
+```
+
+Then start from inside your project with **`/domain-driven-agents:ddd-start`** — it acquires the story,
+sizes the task, and hands off to the Planner subagent; the pipeline runs
+Planner → Executor → Reviewer → Documenter, each with isolated context. The plugin
+ships the skills and subagents; the universal conduct travels in the
+`pipeline-conduct` skill (root `AGENTS.md` / `contract-template.md` do **not** travel —
+that's why they live as skills).

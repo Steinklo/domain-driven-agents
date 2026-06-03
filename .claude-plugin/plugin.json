@@ -1,0 +1,33 @@
+{
+  "name": "domain-driven-agents",
+  "description": "C# Domain-Driven Design pipeline — four role subagents (Planner, Executor, Reviewer, Documenter) and the DDD coding skills they enforce (aggregates, value objects, CQRS, Result type, architecture tests, ubiquitous language, ADRs).",
+  "version": "0.1.0",
+  "author": { "name": "Steinklo" },
+  "repository": "https://github.com/Steinklo/domain-driven-agents",
+  "skills": [
+    "./skills/csharp/common/arch-testing-dotnet",
+    "./skills/csharp/common/cqrs",
+    "./skills/csharp/common/result-type",
+    "./skills/csharp/common/solution-structure",
+    "./skills/csharp/tactical-ddd/aggregates",
+    "./skills/csharp/tactical-ddd/domain-events",
+    "./skills/csharp/tactical-ddd/domain-services",
+    "./skills/csharp/tactical-ddd/invariant-protection",
+    "./skills/csharp/tactical-ddd/repositories",
+    "./skills/csharp/tactical-ddd/value-objects",
+    "./skills/shared/contract-template",
+    "./skills/shared/ddd-start",
+    "./skills/shared/decision-records",
+    "./skills/shared/doc-standards",
+    "./skills/shared/grill-before-contract",
+    "./skills/shared/pipeline-conduct",
+    "./skills/shared/spec-before-code",
+    "./skills/shared/ubiquitous-language"
+  ],
+  "agents": [
+    "./agents/planner.md",
+    "./agents/executor.md",
+    "./agents/reviewer.md",
+    "./agents/documenter.md"
+  ]
+}
