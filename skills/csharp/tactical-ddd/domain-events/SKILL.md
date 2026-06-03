@@ -2,6 +2,7 @@
 name: domain-events
 scope: csharp
 used-by: [executor, reviewer]
+description: Models past-tense domain events raised inside aggregates and published in Application, with immutable record events and side-effect-only handlers via Mediator INotification. Use when raising an event from an aggregate, wiring an event handler for side effects, or reviewing that handlers hold no invariant logic.
 ---
 
 # Domain Events
@@ -37,7 +38,7 @@ public record OrderPlacedEvent(OrderId OrderId, CustomerId CustomerId, DateTime 
 ### Handler (Application)
 
 ```csharp
-public class OrderPlacedHandler(IEmailService emailService)
+public class OrderPlacedEventHandler(IEmailService emailService)
     : INotificationHandler<OrderPlacedEvent>
 {
     public async ValueTask Handle(OrderPlacedEvent e, CancellationToken ct)

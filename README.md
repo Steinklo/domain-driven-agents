@@ -15,6 +15,11 @@ connected by a structured **contract** that carries context between them.
 The Planner designs, the Executor implements code and tests, the Reviewer judges
 independently, and the Documenter records what was approved.
 
+How much of the pipeline runs **scales with the task**: a scope gate sizes each task
+Trivial / Standard / Domain, and only the heavier tiers pull in the full ceremony.
+Steps hand off through role-appropriate artifacts (the contract, a delivery-note, a
+review verdict) that keep each agent's context isolated — see `AGENTS.md`.
+
 ## How it works
 
 This repo is a collection of markdown files — no runtime, no dependencies.
@@ -28,7 +33,7 @@ NetArchTest, FluentValidation).
 - **Contract** (`contract-template.md`) — structured handoff format between
   agents. The Planner produces a filled contract per task; store it in the
   target project (e.g. `docs/contracts/`) so downstream agents can read it.
-- **AGENTS.md** — universal conduct rules all agents follow.
+- **AGENTS.md** — universal conduct, task sizing, and handoffs all agents follow.
 
 ## Scope
 
@@ -41,15 +46,17 @@ does not prescribe technology preferences.
 ## Getting started
 
 1. Open this repo in your AI coding agent.
-2. The agent reads `AGENTS.md`, asks which role to assume, loads the relevant
-   skills, and asks what to build.
-3. Tell it what project to work on.
+2. Point it at a unit of work — a user story or task — and the target project.
+   It begins as the Planner and asks for the story's content: paste it, point to a
+   file, or (if your tracker is wired up) let it fetch.
+3. It sizes the task (Trivial / Standard / Domain), grills you to close the gaps,
+   then writes the contract into the target project — and the pipeline runs from there.
 
 ```
 cd domain-driven-agents
 your-agent
-> "I want to add an Order aggregate to ~/projects/my-app"
+> "Hi! Let's work on user story 123456 in ~/projects/my-app"
 ```
 
-The agent will ask you to pick a role (e.g. Planner to design the contract,
-Executor to implement) before starting work.
+The story is raw input; the Planner refines it into the contract through grilling.
+It asks before it assumes.

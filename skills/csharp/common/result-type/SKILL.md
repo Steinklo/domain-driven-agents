@@ -2,6 +2,7 @@
 name: result-type
 scope: csharp
 used-by: [executor, reviewer]
+description: Defines the Result<T> contract (IsSuccess/IsFailure, Value, Error, Success/Failure factories) and how each layer produces, propagates, and maps it. Use when returning Result from domain operations, propagating it through handlers, mapping it to HTTP responses, or reviewing failure handling.
 ---
 
 # Result\<T\>

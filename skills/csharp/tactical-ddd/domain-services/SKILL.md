@@ -2,6 +2,7 @@
 name: domain-services
 scope: csharp
 used-by: [executor, reviewer]
+description: Defines stateless domain services in the Domain project for logic spanning multiple aggregates, taking aggregates/value objects as parameters and returning Result<T> without repositories. Use when logic spans two or more aggregates, deciding between a domain service and an Application handler, or reviewing for infrastructure leakage.
 ---
 
 # Domain Services

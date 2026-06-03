@@ -2,6 +2,7 @@
 name: value-objects
 scope: csharp
 used-by: [executor, reviewer]
+description: Models immutable value objects defined by attributes rather than identity, validated via factories returning Result<T>, with strongly-typed IDs replacing primitives. Use when introducing a value object, replacing a primitive domain concept, or reviewing equality, immutability, and validation.
 ---
 
 # Value Objects

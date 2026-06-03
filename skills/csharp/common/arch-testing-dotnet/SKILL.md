@@ -2,6 +2,7 @@
 name: arch-testing-dotnet
 scope: csharp
 used-by: [executor, reviewer]
+description: Enforces layer boundaries mechanically with NetArchTest xUnit tests covering dependency direction, CQRS separation, and absent EF attributes on domain types. Use when adding an architecture rule, writing or running boundary tests, or reviewing that a new contract rule is covered by a test.
 ---
 
 # Architecture Testing — NetArchTest

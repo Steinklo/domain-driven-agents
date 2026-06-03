@@ -2,6 +2,7 @@
 name: repositories
 scope: csharp
 used-by: [executor, reviewer]
+description: Defines repositories as one-per-aggregate-root abstractions with the interface in Domain and EF Core implementation in Infrastructure, returning roots via strongly-typed IDs and keeping queries out. Use when adding a repository, splitting read from write access, or reviewing persistence boundaries and ORM-attribute leakage.
 ---
 
 # Repositories

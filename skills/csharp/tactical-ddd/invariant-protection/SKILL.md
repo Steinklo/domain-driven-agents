@@ -2,6 +2,7 @@
 name: invariant-protection
 scope: csharp
 used-by: [executor, reviewer]
+description: Cross-cutting C# mechanisms for guarding business rules — private setters, factory construction, Result<T> returns, and guarding at the aggregate boundary instead of throwing. Use when enforcing an invariant, deciding between Result and exceptions, or reviewing where validation lives.
 ---
 
 # Invariant Protection

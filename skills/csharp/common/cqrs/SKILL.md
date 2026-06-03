@@ -2,6 +2,7 @@
 name: cqrs
 scope: csharp
 used-by: [executor, reviewer]
+description: Separates command and query pipelines via Mediator — commands mutate through aggregates returning Result<T>, queries read projections, with cross-cutting concerns in Application. Use when adding a command or query handler, placing validation/transaction/logging behaviors, or reviewing for mixed read/write or handler-to-handler calls.
 ---
 
 # CQRS
@@ -32,7 +33,7 @@ Recommended implementation:
 public record PlaceOrderCommand(CustomerId CustomerId, List<LineItemDto> Items)
     : ICommand<Result<OrderId>>;
 
-public class PlaceOrderHandler(IOrderRepository repo)
+public class PlaceOrderCommandHandler(IOrderRepository repo)
     : ICommandHandler<PlaceOrderCommand, Result<OrderId>>
 {
     public async ValueTask<Result<OrderId>> Handle(PlaceOrderCommand cmd, CancellationToken ct)
@@ -51,7 +52,7 @@ public class PlaceOrderHandler(IOrderRepository repo)
 ```csharp
 public record GetOrderByIdQuery(OrderId Id) : IQuery<OrderDto?>;
 
-public class GetOrderByIdHandler(IOrderReadRepository repo)
+public class GetOrderByIdQueryHandler(IOrderReadRepository repo)
     : IQueryHandler<GetOrderByIdQuery, OrderDto?>
 {
     public async ValueTask<OrderDto?> Handle(GetOrderByIdQuery query, CancellationToken ct)
@@ -69,7 +70,7 @@ never in the domain.
 3. **No domain logic** in cross-cutting concerns — that's the aggregate's job.
 4. **Order matters** — validation before transaction before retry.
 
-Consider also: **Performance** — log warnings for slow requests (e.g. > N seconds).
+Consider also: **Performance** — log warnings for slow requests (e.g. > 500 ms).
 
 ## Don't
 

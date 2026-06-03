@@ -2,6 +2,7 @@
 name: aggregates
 scope: csharp
 used-by: [executor, reviewer]
+description: Rules for designing aggregate roots as consistency boundaries — base types, factory/reconstitute construction, encapsulated collections, ID-only cross-aggregate references. Use when modeling a new aggregate, routing mutations through a root, or reviewing aggregate boundaries.
 ---
 
 # Aggregates
@@ -80,4 +81,5 @@ public class Order : AggregateRoot
 - Expose `List<T>` — use `IReadOnlyCollection<T>`.
 - Let child entities raise domain events — only the root raises them.
 - Create "god aggregates" that own half the domain.
-- Use public setters or `init` on domain properties.
+- Expose **public** setters or `init` on domain properties — `Reconstitute` hydrates
+  through a private constructor / private setters instead.

@@ -3,7 +3,8 @@
 These rules apply to **every** agent in the Domain-Driven Agents pipeline
 (Planner, Executor, Reviewer, Documenter). Role-specific behavior lives in
 `agents/`. Domain knowledge lives in `skills/`. Task-specific truth lives in
-the planner's **contract**. This file is *only* about how an agent conducts itself.
+the planner's **contract** — produced per task in the target project, never stored
+in this repo. This file is *only* about how an agent conducts itself.
 
 > Conditional beats absolute. "Always ask" becomes noise; "ask when it affects the
 > model" stays precise. Prefer positive instructions ("do X") over negations
@@ -12,7 +13,8 @@ the planner's **contract**. This file is *only* about how an agent conducts itse
 ## Startup
 
 1. Read this file fully.
-2. Ask the user which **agent role** to assume (Planner, Executor, Reviewer, Documenter).
+2. Ask the user which **agent role** to assume — default to **Planner** for a new
+   story or task (Executor for a Trivial change against an existing contract).
 3. Read your agent file in `agents/<role>/AGENT.md`.
 4. Read every skill your agent file lists. Skill names map to paths:
 
@@ -29,13 +31,52 @@ the planner's **contract**. This file is *only* about how an agent conducts itse
    | `solution-structure` | `skills/csharp/common/solution-structure/SKILL.md` |
    | `arch-testing-dotnet` | `skills/csharp/common/arch-testing-dotnet/SKILL.md` |
    | `ubiquitous-language` | `skills/shared/ubiquitous-language/SKILL.md` |
+   | `grill-before-contract` | `skills/shared/grill-before-contract/SKILL.md` |
    | `spec-before-code` | `skills/shared/spec-before-code/SKILL.md` |
+   | `decision-records` | `skills/shared/decision-records/SKILL.md` |
    | `doc-standards` | `skills/shared/doc-standards/SKILL.md` |
 
 5. If Planner: read `contract-template.md`.
-6. Ask the user what to build and which project to work in.
+6. Ask the user what to build — a user story or task — and which project to work in.
+7. **Size the task** against *Task sizing* below and confirm the tier with the
+   human — it decides which agents run and how heavy the contract is.
 
 Do not start working until all of the above is done.
+
+## Task sizing
+
+Size the task before working — it sets how much of the pipeline runs. The agent
+**proposes** a tier; the **human confirms** (humans own boundaries). When unsure
+between two tiers, pick the heavier one.
+
+| Tier | The task… | Runs |
+|---|---|---|
+| **Trivial** | touches 1–2 files and introduces no new/changed invariant, aggregate, bounded context, or public contract | Executor works against the **existing** code + glossary, light self-review. No new contract, no handoff artifacts. |
+| **Standard** | adds behavior *within* an existing aggregate/context — touches invariants but crosses no boundary | Planner writes a **mini contract** → Executor → Reviewer → Documenter (if a term/decision arose). Delivery-note + verdict. |
+| **Domain** | introduces a new bounded context or aggregate, or moves a boundary | Full pipeline, full contract, **mandatory human approval** of the boundary. |
+
+- **Only a human may place a boundary- or invariant-touching task below Domain.**
+  An agent that is unsure rounds up.
+- The contract is **one immutable spec per task — frozen once approved.** If review
+  finds the contract itself wrong, that's a planning defect — escalate to the human;
+  the fixture everyone measures against is never patched mid-task (see *Handoffs*).
+
+## Handoffs
+
+Each step passes forward only what the next role should see — context isolation is
+deliberate, and artifacts scale with tier (**Trivial produces none**).
+
+| From → To | Carries | Withholds |
+|---|---|---|
+| Planner → Executor | the contract | — |
+| Executor → **Reviewer** | code + tests + the *same* contract | the Executor's reasoning — the Reviewer judges fresh |
+| Executor → Documenter / human | a **delivery-note** (assumptions + decisions made) | — (this feeds ADRs) |
+| Reviewer → Executor | findings (the loop) | — |
+| Reviewer → human | a contract-level fault — a planning defect, escalated not patched | — |
+| Reviewer → Documenter | approval signal + the verdict (triggers documentation) | the review back-and-forth |
+
+The delivery-note goes to the Documenter and the human, **not** to the Reviewer —
+handing it over would contaminate the fresh judgment.
 
 ## Conduct
 
@@ -63,6 +104,9 @@ Do not start working until all of the above is done.
   boundary as decided — propose it and require human approval.
 - Respect layer separation: Domain depends on nothing; Application depends only on
   Domain; Infrastructure points inward; Presentation stays thin.
+- Conform to the host project's existing structure and conventions when it already
+  follows a coherent DDD / Clean Architecture layout. Impose the pipeline's own
+  layout only when there is no coherent pattern to follow (see `solution-structure`).
 - Use `Result<T>` for business-rule violations; reserve exceptions for unexpected
   technical failures.
 - One bounded context per implementation task — never work across context

@@ -2,6 +2,7 @@
 name: spec-before-code
 scope: shared
 used-by: [planner]
+description: Requires Gherkin acceptance criteria covering happy and failure paths before any implementation, with one scenario per invariant in domain language. Use when planning a new task, writing the contract, or specifying behavior before coding starts.
 ---
 
 # Spec Before Code
