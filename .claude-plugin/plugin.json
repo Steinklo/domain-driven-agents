@@ -1,0 +1,30 @@
+{
+  "name": "domain-driven-agents",
+  "description": "A collection of language-agnostic Domain-Driven Design skills — strategic design (ubiquitous language, bounded contexts, context mapping, subdomains), tactical patterns (aggregates, entities, value objects, invariants, domain events, domain services, repositories, factories, specifications), and collaborative discovery (event storming, domain storytelling, example mapping).",
+  "version": "0.1.0",
+  "author": { "name": "Steinklo" },
+  "repository": "https://github.com/Steinklo/domain-driven-agents",
+  "skills": [
+    "./skills/ubiquitous-language",
+    "./skills/bounded-contexts",
+    "./skills/context-mapping",
+    "./skills/subdomains",
+    "./skills/aggregates",
+    "./skills/entities",
+    "./skills/value-objects",
+    "./skills/invariants",
+    "./skills/domain-events",
+    "./skills/domain-services",
+    "./skills/repositories",
+    "./skills/factories",
+    "./skills/specifications",
+    "./skills/event-storming",
+    "./skills/domain-storytelling",
+    "./skills/example-mapping"
+  ],
+  "agents": [
+    "./agents/modeler.md",
+    "./agents/implementer.md",
+    "./agents/reviewer.md"
+  ]
+}
