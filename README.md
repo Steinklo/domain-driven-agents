@@ -55,23 +55,18 @@ rather than a background subagent; `implementer` and `reviewer` run well autonom
 ## Using it in a prompt
 
 **Skills** carry the *knowledge*. You rarely name them — the harness reads each
-skill's description and pulls in the relevant one when your request touches it. You
-can also invoke one explicitly.
+skill's description and pulls in the relevant one when your request touches it, but
+you can also invoke one explicitly.
 
 ```
 # Let the harness choose — it surfaces `aggregates` + `invariants` on its own
 "Model an Order that can't be confirmed once it has shipped."
 
-# Name a skill explicitly so the harness reaches for it
-"Apply the value-objects skill: turn this Money string+decimal pair into a
- proper type."
-
-# Ask a skill to critique existing code
-"Use the repositories skill to check whether OrderRepository is a real
- repository or just a table gateway."
+# Name a skill explicitly
+"Apply the value-objects skill: turn this Money string+decimal pair into a proper type."
 ```
 
-**Agents** carry the *role*. Adopt one to drive the session, or spawn one to do a
+**Agents** carry the *role*. Adopt one to drive the session, or spawn one for a
 self-contained piece of work.
 
 ```
@@ -79,49 +74,15 @@ self-contained piece of work.
 "Act as the modeler. Interview me about a 'gift card redemption' feature
  until the language and boundaries are clear."
 
-# Spawn the implementer against an agreed model
-"Spawn the implementer to build the GiftCard aggregate we just modeled
- in ~/projects/wallet, matching the existing project conventions."
-
 # Spawn the reviewer for an independent pass
 "Have the reviewer judge the uncommitted changes against the DDD tactical
  rules and report findings ranked by severity."
 ```
 
-## A full run: user story → pull request
-
-One prompt can drive the whole team from a raw story to an open PR. The trick is to
-let each role play to its strength — the `modeler` interactively, then the
-`implementer` and `reviewer` as a spawn-and-loop.
-
-```
-Take user story SHOP-412 — "A customer can apply a discount code at checkout" —
-through the full DDD flow in ~/projects/shop:
-
-1. Start as the modeler. Interview me to pin down the ubiquitous language, the
-   bounded context this belongs in, and the rules (as concrete examples) before
-   any code. Show me the model sketch and wait for my approval.
-2. Once I approve, spawn the implementer to build it in the target project,
-   conforming to its existing structure. Cover every rule with a test.
-3. Spawn the reviewer to judge the result on fresh context. Loop any findings
-   back to the implementer until the reviewer is clean.
-4. When it passes, open a pull request summarizing the model decisions,
-   the invariants enforced, and the tests added.
-```
-
-What happens at each step:
-
-| Step | Role | Output |
-|---|---|---|
-| **1. Model** | `modeler` (drives) | Glossary terms, the context + candidate boundaries (yours to approve), rules written as examples |
-| **2. Build** | `implementer` (spawned) | Aggregates/value objects/events with invariants guarded, plus tests for each rule and example |
-| **3. Judge** | `reviewer` (spawned, fresh context) | Findings ranked by severity; fixes loop back to the implementer |
-| **4. Ship** | main session | Branch + pull request describing the model, invariants, and tests |
-
-The human stays in the loop where it counts — approving the boundaries in step 1
-(humans own boundaries) — and the autonomous roles handle the mechanical build-and-check
-in steps 2–3. For a larger story you can fan the implementer out per aggregate and run
-a reviewer on each.
+One prompt can chain all three: model as the `modeler`, spawn the `implementer` to
+build against the approved model, then spawn the `reviewer` on fresh context and loop
+its findings back until clean. The human stays in the loop where it counts — approving
+the boundaries before any code.
 
 ## Install
 

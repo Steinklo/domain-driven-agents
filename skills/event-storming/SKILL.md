@@ -38,4 +38,4 @@ A hotspot sits on "Payment Captured": experts disagree on what happens when capt
 - Sticky colors used inconsistently, so roles blur and the timeline stops meaning anything.
 
 ## Related
-[[domain-events]] [[domain-storytelling]] [[example-mapping]] [[ubiquitous-language]] [[bounded-contexts]] [[context-mapping]] [[subdomains]] [[aggregates]]
+[[domain-events]] · [[bounded-contexts]] · [[ubiquitous-language]] · [[domain-storytelling]] · [[example-mapping]]

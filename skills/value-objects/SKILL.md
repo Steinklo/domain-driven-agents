@@ -11,7 +11,7 @@ A value object is a domain concept defined **entirely by its attributes**, with 
 Most of a model is descriptive, not identified: an amount of money, a date range, a color, an address. Modeling these as value objects packages related attributes into a single meaningful whole, attaches invariants and behavior to them, and removes the identity-tracking overhead that entities carry. Skip them and the domain drowns in loose, unnamed primitives (a raw number here, a raw text field there) with rules smeared across the codebase.
 
 ## Core rules
-1. **No identity.** Equality is by attribute value, not by a reference or id. If two instances need to be told apart despite equal attributes, you want an entity (modeled inside an [[aggregates]]), not a value object.
+1. **No identity.** Equality is by attribute value, not by a reference or id. If two instances need to be told apart despite equal attributes, you want an entity, not a value object. See [[entities]].
 2. **Immutable.** Never mutate an existing instance; to "change" it, construct a new one. This makes value objects safe to share and pass freely.
 3. **Self-validating at construction.** An instance can only come into existence in a valid state; reject invalid input before an object exists. See [[invariants]].
 4. **Whole-value replacement.** Assign a fresh value object in place of the old one rather than reaching in to edit an attribute.
@@ -36,4 +36,4 @@ Contrast with `Product`, which has an identity (a product number): two products 
 - Bolting a database-generated id onto something that has no true identity.
 
 ## Related
-[[aggregates]] · [[ubiquitous-language]] · [[domain-events]]
+[[aggregates]] · [[entities]] · [[ubiquitous-language]] · [[domain-events]]
