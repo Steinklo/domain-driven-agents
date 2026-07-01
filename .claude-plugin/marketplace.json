@@ -3,7 +3,7 @@
   "owner": { "name": "Steinklo" },
   "plugins": [
     {
-      "name": "domain-driven-design",
+      "name": "domain-driven-agents",
       "source": ".",
       "description": "Language-agnostic Domain-Driven Design skills: strategic design, tactical patterns, and collaborative discovery."
     }

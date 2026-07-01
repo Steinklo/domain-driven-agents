@@ -1,5 +1,5 @@
 {
-  "name": "domain-driven-design",
+  "name": "domain-driven-agents",
   "description": "A collection of language-agnostic Domain-Driven Design skills — strategic design (ubiquitous language, bounded contexts, context mapping, subdomains), tactical patterns (aggregates, entities, value objects, invariants, domain events, domain services, repositories, factories, specifications), and collaborative discovery (event storming, domain storytelling, example mapping).",
   "version": "0.1.0",
   "author": { "name": "Steinklo" },

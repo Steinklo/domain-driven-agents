@@ -130,11 +130,11 @@ form):
 
 ```
 /plugin marketplace add Steinklo/domain-driven-agents
-/plugin install domain-driven-design@steinklo
+/plugin install domain-driven-agents@steinklo
 ```
 
 Once installed, the plugin's skills and agents are namespaced under the plugin —
-e.g. the modeler is available as `domain-driven-design:modeler`. You can also run
+e.g. the modeler is available as `domain-driven-agents:modeler`. You can also run
 `/plugin` for the interactive install menu, or point any Claude Code agent at this
 repo directly — the skills live under `skills/`.
 
