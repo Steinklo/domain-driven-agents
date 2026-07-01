@@ -79,10 +79,20 @@ self-contained piece of work.
  rules and report findings ranked by severity."
 ```
 
-One prompt can chain all three: model as the `modeler`, spawn the `implementer` to
-build against the approved model, then spawn the `reviewer` on fresh context and loop
-its findings back until clean. The human stays in the loop where it counts — approving
-the boundaries before any code.
+One prompt can chain all three — drive a feature from a fuzzy idea to reviewed code in
+a single session:
+
+```
+"Act as the modeler. Interview me about gift-card redemption for our wallet until the
+ ubiquitous language, the bounded context, and the redemption rules (as concrete
+ examples) are clear — then show me the model and wait for my approval.
+
+ Once I approve, spawn the implementer to build it in ~/projects/wallet, matching the
+ existing conventions and covering every rule with a test. Then spawn the reviewer to
+ judge it on fresh context, and loop its findings back to the implementer until clean."
+```
+
+The human stays in the loop where it counts — approving the boundaries before any code.
 
 ## What it produces
 
