@@ -84,6 +84,22 @@ build against the approved model, then spawn the `reviewer` on fresh context and
 its findings back until clean. The human stays in the loop where it counts — approving
 the boundaries before any code.
 
+## What it produces
+
+The `modeler` turns a fuzzy feature into shared language and rules written as testable
+examples — the raw material the `implementer` builds and the `reviewer` checks:
+
+```
+Glossary
+  Remaining Balance — the part of a gift card's face amount not yet redeemed;
+  drops with each redemption, never below zero.
+
+Invariant, as an example
+  Given a gift card with remaining balance 30
+  When  a redemption of 50 is attempted
+  Then  it is rejected ("Insufficient Balance") and the balance stays 30
+```
+
 ## Install
 
 Add the marketplace, then install the plugin (installs use the `plugin@marketplace`
